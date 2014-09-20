@@ -1,2 +1,5 @@
 comparably/bower_components/
+comparably/node_modules/
+comparably/.idea
+comparably/Comparably.iml
 *.sw*
