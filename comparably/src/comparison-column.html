@@ -1,0 +1,45 @@
+<link rel="import" href="comparison-title.html" />
+
+<template id="comparison-column">
+    <style>
+        section {
+            display: inline-block;
+
+            width: 600px;
+            padding: 20px 0;
+            margin: 40px 50px;
+
+            background-color: #fff;
+
+            border-radius: 20px;
+        }
+    </style>
+
+    <section>
+        <comparison-title>
+            <content select="h1"></content>
+        </comparison-title>
+
+        <content select="ul"></content>
+    </section>
+</template>
+
+<script>
+    (function() {
+        var element = Object.create(HTMLElement.prototype);
+
+        var thisDocument = document.currentScript.ownerDocument;
+        var template = thisDocument.querySelector("template#comparison-column");
+
+        // Fires when an instance was inserted into the document
+        element.attachedCallback = function() {
+            var shadowDom = this.createShadowRoot();
+            var templateContent = document.importNode(template.content, true);
+            shadowDom.appendChild(templateContent);
+        };
+
+        document.registerElement('comparison-column', {
+            prototype: element
+        });
+    }());
+</script>

@@ -1,0 +1,56 @@
+<template id="comparison-title">
+    <style>
+        .titleWrapper {
+            width: 100%;
+            margin-left: -20px;
+            padding: 10px 20px;
+            background-color: #758598;
+            position: relative;
+
+            outline: solid #222 4px;
+        }
+
+        .titleWrapper:before, .titleWrapper:after {
+            position: absolute;
+            bottom: -15px;
+            content: '';
+
+            border-style: solid;
+            border-color: #758598 transparent transparent transparent;
+        }
+
+        .titleWrapper:before {
+            left: 2px;
+            border-width: 12px 0 0 15px;
+        }
+
+        .titleWrapper:after {
+            right: 2px;
+            border-width: 12px 15px 0 0;
+        }
+    </style>
+
+    <div class="titleWrapper">
+        <content></content>
+    </div>
+</template>
+
+<script>
+    (function() {
+        var element = Object.create(HTMLElement.prototype);
+
+        var thisDocument = document.currentScript.ownerDocument;
+        var template = thisDocument.querySelector("template#comparison-title");
+
+        // Fires when an instance was inserted into the document
+        element.attachedCallback = function() {
+            var shadowDom = this.createShadowRoot();
+            var templateContent = document.importNode(template.content, true);
+            shadowDom.appendChild(templateContent);
+        };
+
+        document.registerElement('comparison-title', {
+            prototype: element
+        });
+    }());
+</script>
