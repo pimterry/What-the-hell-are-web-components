@@ -1,0 +1,6 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-image: url("images/binding_dark.png");
+}
