@@ -9,22 +9,9 @@
         }
     </style>
 
-    <comparison-column>
-        <h1>My thing</h1>
-        <ul>
-            <li>A</li>
-            <li>B</li>
-            <li>C</li>
-        </ul>
-    </comparison-column>
-    <comparison-column>
-        <h1>Another thing</h1>
-        <ul>
-            <li>A</li>
-            <li>B</li>
-            <li>C</li>
-        </ul>
-    </comparison-column>
+    <!-- Populated with a comparison-list for each <li> in the content
+         by updateShadowDom below, on attach and on any changes -->
+
 </template>
 
 <script>
@@ -36,10 +23,52 @@
 
         // Fires when an instance was inserted into the document
         element.attachedCallback = function() {
+            var content = this;
             var shadowDom = this.createShadowRoot();
+
             var templateContent = document.importNode(template.content, true);
             shadowDom.appendChild(templateContent);
+
+            new MutationObserver(function (mutation) {
+                updateShadowDom(shadowDom, content);
+            }).observe(content, { childList: true, characterData: true, subtree: true });
+
+            updateShadowDom(shadowDom, content);
         };
+
+        function updateShadowDom(shadowDom, content) {
+            var comparisonDomContent = content.querySelectorAll("comparisons-list > ul > li");
+            // Need to clone these nodes, so we can reattach them within comparison columns instead
+            var comparisonData = asArray(comparisonDomContent).map(function (itemDataDom) {
+                return itemDataDom.cloneNode(true);
+            });
+
+            var columns = comparisonData.map(function (comparisonItem) {
+                // Transform the content into comparison columns
+                var comparisonColumn = document.createElement("comparison-column");
+                asArray(comparisonItem.children).forEach(function (node) {
+                    comparisonColumn.appendChild(node);
+                });
+                return comparisonColumn;
+            });
+
+            replaceComparisonColumns(shadowDom, columns);
+        };
+
+        function replaceComparisonColumns(rootNode, children) {
+            asArray(rootNode.querySelectorAll("comparison-column")).forEach(function (column) {
+                rootNode.removeChild(column);
+            });
+            asArray(children).forEach(function (child) {
+                rootNode.appendChild(child);
+            });
+        }
+
+        function asArray(obj) {
+            return [].map.call(obj, function (element) {
+                return element;
+            });
+        }
 
         document.registerElement('comparisons-list', {
             prototype: element
