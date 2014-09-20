@@ -31,8 +31,7 @@
         var thisDocument = document.currentScript.ownerDocument;
         var template = thisDocument.querySelector("template#comparison-column");
 
-        // Fires when an instance was inserted into the document
-        element.attachedCallback = function() {
+        element.createdCallback = function() {
             var shadowDom = this.createShadowRoot();
             var templateContent = document.importNode(template.content, true);
             shadowDom.appendChild(templateContent);

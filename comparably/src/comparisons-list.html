@@ -21,8 +21,7 @@
         var thisDocument = document.currentScript.ownerDocument;
         var template = thisDocument.querySelector("template#comparisons-list");
 
-        // Fires when an instance was inserted into the document
-        element.attachedCallback = function() {
+        element.createdCallback = function() {
             var content = this;
             var shadowDom = this.createShadowRoot();
 

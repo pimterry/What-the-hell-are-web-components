@@ -33,8 +33,7 @@
         var thisDocument = document.currentScript.ownerDocument;
         var template = thisDocument.querySelector("template#comparably-header");
 
-        // Fires when an instance was inserted into the document
-        element.attachedCallback = function() {
+        element.createdCallback = function() {
             var shadowDom = this.createShadowRoot();
             shadowDom.appendChild(template.content);
         };
