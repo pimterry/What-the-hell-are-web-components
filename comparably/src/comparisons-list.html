@@ -1,0 +1,48 @@
+<link rel="import" href="comparison-column.html" />
+
+<template id="comparisons-list">
+    <style>
+        :host {
+            height: auto;
+            display: block;
+            white-space: nowrap;
+        }
+    </style>
+
+    <comparison-column>
+        <h1>My thing</h1>
+        <ul>
+            <li>A</li>
+            <li>B</li>
+            <li>C</li>
+        </ul>
+    </comparison-column>
+    <comparison-column>
+        <h1>Another thing</h1>
+        <ul>
+            <li>A</li>
+            <li>B</li>
+            <li>C</li>
+        </ul>
+    </comparison-column>
+</template>
+
+<script>
+    (function() {
+        var element = Object.create(HTMLElement.prototype);
+
+        var thisDocument = document.currentScript.ownerDocument;
+        var template = thisDocument.querySelector("template#comparisons-list");
+
+        // Fires when an instance was inserted into the document
+        element.attachedCallback = function() {
+            var shadowDom = this.createShadowRoot();
+            var templateContent = document.importNode(template.content, true);
+            shadowDom.appendChild(templateContent);
+        };
+
+        document.registerElement('comparisons-list', {
+            prototype: element
+        });
+    }());
+</script>
