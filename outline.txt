@@ -1,0 +1,5 @@
+The core concept - with the video element?
+The various parts to this: shadow DOM, HTML imports, web components themselves, HTML templates & binding
+What a demo app built of web components looks like
+Why this is great
+What you can actually do with this, now and soon
