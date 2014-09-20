@@ -1,0 +1,46 @@
+<template id="item-facet">
+    <style>
+        :host {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 20px 10px;
+            margin: 0;
+            display: block;
+
+            background-color: #fff;
+            color: #222;
+            border-top: solid #222 3px;
+
+            font-size: 30px;
+        }
+
+        :host(.good) {
+            background-color: #61FF9D;
+        }
+
+        :host(.bad) {
+            background-color: #FF6961;
+        }
+    </style>
+
+    <content></content>
+</template>
+
+<script>
+    (function() {
+        var element = Object.create(HTMLElement.prototype);
+
+        var thisDocument = document.currentScript.ownerDocument;
+        var template = thisDocument.querySelector("template#item-facet");
+
+        element.createdCallback = function() {
+            var shadowDom = this.createShadowRoot();
+            var templateContent = document.importNode(template.content, true);
+            shadowDom.appendChild(templateContent);
+        };
+
+        document.registerElement('item-facet', {
+            prototype: element
+        });
+    }());
+</script>
