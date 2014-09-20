@@ -1,4 +1,4 @@
-<template id="comparison-title">
+<template id="item-title">
     <style>
         .titleWrapper {
             width: 100%;
@@ -40,7 +40,7 @@
         var element = Object.create(HTMLElement.prototype);
 
         var thisDocument = document.currentScript.ownerDocument;
-        var template = thisDocument.querySelector("template#comparison-title");
+        var template = thisDocument.querySelector("template#item-title");
 
         element.createdCallback = function() {
             var shadowDom = this.createShadowRoot();
@@ -48,7 +48,7 @@
             shadowDom.appendChild(templateContent);
         };
 
-        document.registerElement('comparison-title', {
+        document.registerElement('item-title', {
             prototype: element
         });
     }());

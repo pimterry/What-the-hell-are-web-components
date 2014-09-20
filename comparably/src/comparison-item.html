@@ -1,6 +1,7 @@
-<link rel="import" href="comparison-title.html" />
+<link rel="import" href="item-title.html" />
+<link rel="import" href="item-facet.html" />
 
-<template id="comparison-column">
+<template id="comparison-item">
     <style>
         section {
             display: inline-block;
@@ -16,9 +17,9 @@
     </style>
 
     <section>
-        <comparison-title>
+        <item-title>
             <content select="h1"></content>
-        </comparison-title>
+        </item-title>
 
         <content select="ul"></content>
     </section>
@@ -29,7 +30,7 @@
         var element = Object.create(HTMLElement.prototype);
 
         var thisDocument = document.currentScript.ownerDocument;
-        var template = thisDocument.querySelector("template#comparison-column");
+        var template = thisDocument.querySelector("template#comparison-item");
 
         element.createdCallback = function() {
             var shadowDom = this.createShadowRoot();
@@ -37,7 +38,7 @@
             shadowDom.appendChild(templateContent);
         };
 
-        document.registerElement('comparison-column', {
+        document.registerElement('comparison-item', {
             prototype: element
         });
     }());

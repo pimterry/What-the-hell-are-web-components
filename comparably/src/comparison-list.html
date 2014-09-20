@@ -1,6 +1,6 @@
-<link rel="import" href="comparison-column.html" />
+<link rel="import" href="comparison-item.html" />
 
-<template id="comparisons-list">
+<template id="comparison-list">
     <style>
         :host {
             height: auto;
@@ -19,7 +19,7 @@
         var element = Object.create(HTMLElement.prototype);
 
         var thisDocument = document.currentScript.ownerDocument;
-        var template = thisDocument.querySelector("template#comparisons-list");
+        var template = thisDocument.querySelector("template#comparison-list");
 
         element.createdCallback = function() {
             var content = this;
@@ -36,7 +36,7 @@
         };
 
         function updateShadowDom(shadowDom, content) {
-            var comparisonDomContent = content.querySelectorAll("comparisons-list > ul > li");
+            var comparisonDomContent = content.querySelectorAll("comparison-list > ul > li");
             // Need to clone these nodes, so we can reattach them within comparison columns instead
             var comparisonData = asArray(comparisonDomContent).map(function (itemDataDom) {
                 return itemDataDom.cloneNode(true);
@@ -44,7 +44,7 @@
 
             var columns = comparisonData.map(function (comparisonItem) {
                 // Transform the content into comparison columns
-                var comparisonColumn = document.createElement("comparison-column");
+                var comparisonColumn = document.createElement("comparison-item");
                 asArray(comparisonItem.children).forEach(function (node) {
                     comparisonColumn.appendChild(node);
                 });
@@ -55,7 +55,7 @@
         };
 
         function replaceComparisonColumns(rootNode, children) {
-            asArray(rootNode.querySelectorAll("comparison-column")).forEach(function (column) {
+            asArray(rootNode.querySelectorAll("comparison-item")).forEach(function (column) {
                 rootNode.removeChild(column);
             });
             asArray(children).forEach(function (child) {
@@ -69,7 +69,7 @@
             });
         }
 
-        document.registerElement('comparisons-list', {
+        document.registerElement('comparison-list', {
             prototype: element
         });
     }());
