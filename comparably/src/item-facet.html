@@ -1,4 +1,4 @@
-<template id="item-facet">
+<template>
     <style> @import "src/facet.css"; </style>
 
     <div>
@@ -11,7 +11,7 @@
         var element = Object.create(HTMLElement.prototype);
 
         var thisDocument = document.currentScript.ownerDocument;
-        var template = thisDocument.querySelector("template#item-facet");
+        var template = thisDocument.querySelector("template");
 
         element.createdCallback = function () {
             var shadowDom = this.createShadowRoot();
