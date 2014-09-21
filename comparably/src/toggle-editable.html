@@ -1,0 +1,87 @@
+<template id="saved">
+    <content></content>
+</template>
+
+<template id="editing">
+    <style>
+        input {
+            font-size: 80%;
+            font-weight: inherit;
+
+            box-sizing:border-box;
+            width: 100%;
+            padding: 2px;
+
+            border-width: 0;
+            margin: 0;
+        }
+    </style>
+    <input type="text" value="" />
+</template>
+
+<script>
+    (function() {
+        var element = Object.create(HTMLElement.prototype);
+
+        var thisDocument = document.currentScript.ownerDocument;
+
+        element.createdCallback = function() {
+            var shadowDom = this.createShadowRoot();
+            this.isEditing = true;
+
+            this.showContent();
+            this.addEventListener("click", this.makeEditable);
+            this.addEventListener("blur", this.showContent);
+        };
+
+        var savedTemplate = thisDocument.querySelector("template#saved");
+
+        element.showContent = function () {
+            if (!this.isEditing) return;
+            this.isEditing = false;
+
+            clearChildren(this.shadowRoot);
+
+            var savedLayout = document.importNode(savedTemplate.content, true);
+            this.shadowRoot.appendChild(savedLayout);
+        }
+
+        var editingTemplate = thisDocument.querySelector("template#editing");
+
+        element.makeEditable = function () {
+            if (this.isEditing) return;
+            this.isEditing = true;
+
+            clearChildren(this.shadowRoot);
+
+            var editingLayout = document.importNode(editingTemplate.content, true);
+            var input = editingLayout.querySelector("input");
+
+            var originalNode = getOriginalContent(this);
+            input.value = originalNode.textContent;
+            input.addEventListener("change", function () {
+                originalNode.textContent = input.value;
+            })
+
+            this.shadowRoot.appendChild(editingLayout);
+            input.focus();
+        }
+
+        function getOriginalContent(node) {
+            while (node.children && node.children.length && node.children[0].getDistributedNodes) {
+                node = node.children[0].getDistributedNodes()[0];
+            }
+            return node;
+        }
+
+        function clearChildren(node) {
+            while (node.hasChildNodes()) {
+                node.removeChild(node.lastChild);
+            }
+        }
+
+        document.registerElement('toggle-editable', {
+            prototype: element
+        });
+    }());
+</script>
