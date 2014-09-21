@@ -19,19 +19,47 @@
 <body>
     <comparably-header></comparably-header>
 
-    <lozenge-list>
-        <comparison-lozenge title="My thing">
-            <item-facet score=10>A thing</item-facet>
-            <item-facet score=90>A thing</item-facet>
-            <item-facet score=20>A thing</item-facet>
-            <item-facet score=50>A thing</item-facet>
-        </comparison-lozenge>
-        <comparison-lozenge title="My thing">
-            <item-facet score=10>A thing</item-facet>
-            <item-facet score=90>A thing</item-facet>
-            <item-facet score=20>A thing</item-facet>
-            <item-facet score=50>A thing</item-facet>
+    <lozenge-list data-bind="foreach: items">
+        <comparison-lozenge data-bind="event: { 'add-facet': addFacet }">
+            <lozenge-banner data-bind="editableText: name"></lozenge-banner>
+            <!-- ko foreach: facets -->
+                <item-facet data-bind="attr: { score: score },
+                                       editableText: description">
+                </item-facet>
+            <!-- /ko -->
         </comparison-lozenge>
     </lozenge-list>
+
+    <script src="bower_components/knockout/dist/knockout.debug.js"></script>
+    <script src="bower_components/knockout-mapping/knockout.mapping.js"></script>
+
+    <script src="src/editable-binding.js"></script>
+    <script src="src/ItemViewModel.js"></script>
+    <script src="src/FacetViewModel.js"></script>
+
+    <script>
+        (function () {
+            var initialData = {
+                facets: [{ id: 0, name: "Goodness" },
+                         { id: 1, name: "Niceness" },
+                         { id: 2, name: "Greatness" }],
+                items: [{ name: "Best item",
+                    facets: [{id: 0, description: "Not bad", score: 50},
+                             {id: 1, description: "Better", score: 70},
+                             {id: 2, description: "Very very good", score: 99}]},
+                    { name: "Another item",
+                        facets: [{id: 0, description: "Terrible", score: 20},
+                                 {id: 1, description: "A bit better", score: 60},
+                                 {id: 2, description: "Very good", score: 90}]}
+                ]
+            };
+
+            initialData.items = initialData.items.map(function (item) {
+                return new ItemViewModel(item);
+            });
+
+            ko.applyBindings(initialData, document.querySelector("lozenge-list"));
+        })();
+    </script>
 </body>
 </html>

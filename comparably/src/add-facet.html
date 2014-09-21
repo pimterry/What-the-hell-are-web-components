@@ -27,6 +27,10 @@
             var shadowDom = this.createShadowRoot();
             var templateContent = document.importNode(template.content, true);
             shadowDom.appendChild(templateContent);
+
+            this.addEventListener("click", function () {
+                this.dispatchEvent(new Event("add-facet"));
+            });
         };
 
         document.registerElement('add-facet', {

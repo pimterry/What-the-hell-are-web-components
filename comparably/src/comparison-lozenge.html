@@ -7,7 +7,6 @@
             display: inline-block;
             position: relative;
 
-            width: 600px;;
             margin: 40px 50px;
 
             background-color: #fff;
@@ -36,8 +35,6 @@
     </style>
 
     <section>
-        <lozenge-banner></lozenge-banner>
-
         <content></content>
 
         <add-facet></add-facet>
@@ -55,19 +52,7 @@
             var shadowDom = this.createShadowRoot();
             var templateContent = document.importNode(template.content, true);
             shadowDom.appendChild(templateContent);
-
-            this.setTitle(this.getAttribute("title"));
         };
-
-        element.setTitle = function (title) {
-            this.shadowRoot.querySelector("lozenge-banner").innerText = title;
-        }
-
-        element.attributeChangedCallback = function (attrName, oldVal, newVal) {
-            if (attrName === "title") {
-                this.setTitle(newVal);
-            }
-        }
 
         document.registerElement('comparison-lozenge', {
             prototype: element
