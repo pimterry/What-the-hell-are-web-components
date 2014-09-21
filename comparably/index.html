@@ -10,28 +10,26 @@
     <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 
     <link rel="import" href="src/comparably-header.html" />
-    <link rel="import" href="src/comparison-list.html" />
-
+    <link rel="import" href="src/lozenge-list.html" />
+    <link rel="import" href="src/comparison-lozenge.html" />
+    <link rel="import" href="src/item-facet.html" />
 </head>
 <body>
     <comparably-header></comparably-header>
-    <comparison-list>
-        <ul>
-            <li>
-                <h1>My Thing</h1>
-                <ul>
-                    <li class="good">Good at some things</li>
-                    <li class="bad">Less good at others</li>
-                </ul>
-            </li>
-            <li>
-                <h1>My 2nd Thing</h1>
-                <ul>
-                    <li>Ok at some things</li>
-                    <li class="good">Very good at others too</li>
-                </ul>
-            </li>
-        </ul>
-    </comparison-list>
+
+    <lozenge-list>
+        <comparison-lozenge title="My thing">
+            <item-facet score=10>A thing</item-facet>
+            <item-facet score=90>A thing</item-facet>
+            <item-facet score=20>A thing</item-facet>
+            <item-facet score=50>A thing</item-facet>
+        </comparison-lozenge>
+        <comparison-lozenge title="My thing">
+            <item-facet score=10>A thing</item-facet>
+            <item-facet score=90>A thing</item-facet>
+            <item-facet score=20>A thing</item-facet>
+            <item-facet score=50>A thing</item-facet>
+        </comparison-lozenge>
+    </lozenge-list>
 </body>
 </html>

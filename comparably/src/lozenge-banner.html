@@ -1,4 +1,4 @@
-<template id="item-title">
+<template>
     <style>
         .titleWrapper {
             width: 100%;
@@ -33,7 +33,7 @@
     </style>
 
     <div class="titleWrapper">
-        <content></content>
+        <h1><content></content></h1>
     </div>
 </template>
 
@@ -42,7 +42,7 @@
         var element = Object.create(HTMLElement.prototype);
 
         var thisDocument = document.currentScript.ownerDocument;
-        var template = thisDocument.querySelector("template#item-title");
+        var template = thisDocument.querySelector("template");
 
         element.createdCallback = function() {
             var shadowDom = this.createShadowRoot();
@@ -50,7 +50,7 @@
             shadowDom.appendChild(templateContent);
         };
 
-        document.registerElement('item-title', {
+        document.registerElement('lozenge-banner', {
             prototype: element
         });
     }());

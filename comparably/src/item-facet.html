@@ -14,11 +14,11 @@
             font-size: 30px;
         }
 
-        :host(.good) {
+        :host([rating=good]) {
             background-color: #61FF9D;
         }
 
-        :host(.bad) {
+        :host([rating=bad]) {
             background-color: #FF6961;
         }
     </style>
@@ -33,11 +33,28 @@
         var thisDocument = document.currentScript.ownerDocument;
         var template = thisDocument.querySelector("template#item-facet");
 
-        element.createdCallback = function() {
+        element.createdCallback = function () {
             var shadowDom = this.createShadowRoot();
             var templateContent = document.importNode(template.content, true);
             shadowDom.appendChild(templateContent);
+            this.setScore(this.getAttribute("score"));
         };
+
+        element.setScore = function (score) {
+            if (score < 40) {
+                this.setAttribute("rating", "bad");
+            } else if (score >= 60) {
+                this.setAttribute("rating", "good");
+            } else {
+                this.setAttribute("rating", "ok");
+            }
+        }
+
+        element.attributeChangedCallback = function (attrName, oldVal, newVal) {
+            if (attrName === "score") {
+                this.setScore(newVal);
+            }
+        }
 
         document.registerElement('item-facet', {
             prototype: element
