@@ -1,10 +1,14 @@
 <template>
     <style>
         :host {
-            height: auto;
-            display: block;
-            white-space: nowrap;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        ::content > * {
+            flex-shrink: 0;
         }
     </style>
 

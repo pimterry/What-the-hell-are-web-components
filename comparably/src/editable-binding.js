@@ -5,7 +5,7 @@
         init: function (element, valueAccessor) {
             element.setAttribute("contentEditable", "true");
 
-            element.addEventListener("input", function () {
+            element.addEventListener("blur", function () {
                 var observable = valueAccessor();
                 observable(element.textContent);
             });

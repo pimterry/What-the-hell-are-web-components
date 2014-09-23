@@ -1,7 +1,7 @@
 window.ItemViewModel = (function () {
     var ItemFacetViewModel = (function () {
         function ItemFacetViewModel(itemFacet) {
-            this.description = ko.observable(" ");
+            this.description = ko.observable();
             this.score = ko.observable();
             ko.mapping.fromJS(itemFacet, {}, this);
         }

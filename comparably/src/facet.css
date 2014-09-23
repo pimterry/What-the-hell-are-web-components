@@ -11,7 +11,7 @@
     border-top: solid #222 3px;
 
     font-size: 30px;
-    min-height: 83px;
+    min-height: 84px;
 }
 
 :host([rating=good]) {

@@ -14,20 +14,24 @@
     <link rel="import" href="src/comparably-header.html" />
     <link rel="import" href="src/lozenge-list.html" />
     <link rel="import" href="src/comparison-lozenge.html" />
+    <link rel="import" href="src/add-lozenge.html" />
     <link rel="import" href="src/item-facet.html" />
 </head>
 <body>
     <comparably-header></comparably-header>
 
-    <lozenge-list data-bind="foreach: items">
-        <comparison-lozenge data-bind="event: { 'add-facet': addFacet }">
-            <lozenge-banner data-bind="editableText: name"></lozenge-banner>
-            <!-- ko foreach: facets -->
-                <item-facet data-bind="attr: { score: score },
-                                       editableText: description">
-                </item-facet>
-            <!-- /ko -->
-        </comparison-lozenge>
+    <lozenge-list>
+        <!-- ko foreach: items -->
+            <comparison-lozenge data-bind="event: { 'add-facet': addFacet }">
+                <lozenge-banner data-bind="editableText: name"></lozenge-banner>
+                <!-- ko foreach: facets -->
+                    <item-facet data-bind="attr: { score: score },
+                                           editableText: description">
+                    </item-facet>
+                <!-- /ko -->
+            </comparison-lozenge>
+        <!-- /ko -->
+        <add-lozenge data-bind="event: { 'add-item': addItem }"></add-lozenge>
     </lozenge-list>
 
     <script src="bower_components/knockout/dist/knockout.debug.js"></script>
@@ -36,6 +40,7 @@
     <script src="src/editable-binding.js"></script>
     <script src="src/ItemViewModel.js"></script>
     <script src="src/FacetViewModel.js"></script>
+    <script src="src/ComparisonViewModel.js"></script>
 
     <script>
         (function () {
@@ -54,11 +59,8 @@
                 ]
             };
 
-            initialData.items = initialData.items.map(function (item) {
-                return new ItemViewModel(item);
-            });
-
-            ko.applyBindings(initialData, document.querySelector("lozenge-list"));
+            var data = new ComparisonViewModel(initialData);
+            ko.applyBindings(data, document.querySelector("lozenge-list"));
         })();
     </script>
 </body>
