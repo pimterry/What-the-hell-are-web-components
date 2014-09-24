@@ -36,14 +36,14 @@
         }
     </style>
 
-    <h1>
+    <h1 contenteditable>
         <content></content>
     </h1>
 </template>
 
 <script>
     (function() {
-        var element = Object.create(HTMLElement.prototype);
+        var element = Object.create(HTMLHeadingElement.prototype);
 
         var thisDocument = document.currentScript.ownerDocument;
         var template = thisDocument.querySelector("template");
