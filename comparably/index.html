@@ -25,7 +25,7 @@
             <comparison-lozenge data-bind="event: { 'add-facet': addFacet }">
                 <lozenge-banner data-bind="editableText: name"></lozenge-banner>
                 <!-- ko foreach: facets -->
-                    <item-facet data-bind="attr: { score: score },
+                    <item-facet data-bind="twoWayAttr: { score: score },
                                            editableText: description">
                     </item-facet>
                 <!-- /ko -->
@@ -38,6 +38,8 @@
     <script src="bower_components/knockout-mapping/knockout.mapping.js"></script>
 
     <script src="src/editable-binding.js"></script>
+    <script src="src/twoWayAttr-binding.js"></script>
+
     <script src="src/ItemViewModel.js"></script>
     <script src="src/FacetViewModel.js"></script>
     <script src="src/ComparisonViewModel.js"></script>

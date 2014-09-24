@@ -13,15 +13,3 @@
     font-size: 30px;
     min-height: 84px;
 }
-
-:host([rating=good]) {
-    background-color: #61FF9D;
-}
-
-:host([rating=ok]) {
-    background-color: #ddd;
-}
-
-:host([rating=bad]) {
-    background-color: #FF6961;
-}

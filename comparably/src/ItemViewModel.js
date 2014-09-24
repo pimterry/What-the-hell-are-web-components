@@ -10,12 +10,13 @@ window.ItemViewModel = (function () {
     })();
 
     var ItemViewModel = function ItemViewModel(item) {
-        this.name = ko.observable();
+        item.name = item.name || "?";
         this.facets = ko.observableArray();
         ko.mapping.fromJS(item, {}, this);
     };
 
     ItemViewModel.prototype.addFacet = function (facet) {
+        facet.score = facet.score === undefined ? 50 : facet.score;
         this.facets.push(new ItemFacetViewModel(facet));
     }
 
