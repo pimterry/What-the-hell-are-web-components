@@ -139,21 +139,20 @@ html
 
       section
         h2 Shadow DOM
-        div.sideBySide
-          pre
-            code.language-markup.
-              &lt;div id="myDiv2"&gt;
-                Real content
-              &lt;/div&gt;
-          pre
-            code.language-javascript.
+        pre
+          code.language-markup.
+            &lt;div id="myDiv2"&gt;
+              Real content
+            &lt;/div&gt;
+
+            &lt;script type="text/javascript"&gt;
               var div = document.querySelector("#myDiv2")
               var shadow = div.createShadowRoot();
               shadow.innerHTML =
               "&lt;h3&gt;" +
-                "Originally: '&lt;i&gt;&lt;content&gt;&lt;/content&gt;&lt;/i&gt;'" +
+                "Originally: &lt;i&gt;&lt;content&gt;&lt;/content&gt;&lt;/i&gt;" +
               "&lt;/h3&gt;";
-
+            &lt;/script&gt;
         | <div id="myDiv2">
         |    Real content
         | </div>
@@ -205,6 +204,10 @@ html
         |  }, 0);
         | </script>
 
+      section
+        h2 Custom Elements
+
+        | <div class="navbar-target" style="width: 100%"></div>
 
         pre(style='height: 70%; overflow-x: hidden')
           code.language-markup.
