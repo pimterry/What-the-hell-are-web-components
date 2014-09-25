@@ -6,7 +6,7 @@ window.sentiment = (function () {
 
     function stripIrrelevantTokens(tokens) {
         return tokens.filter(function (token) {
-            return afinn.hasOwnProperty(token) || token.length > 5;
+            return afinn.hasOwnProperty(token) || token.length > 4;
         });
     }
 
