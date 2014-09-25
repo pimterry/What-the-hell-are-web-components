@@ -315,7 +315,6 @@ html
                 prototype: NavBarPrototype
             });
 
-
       section
         h2 Custom Elements
         pre
@@ -331,5 +330,82 @@ html
             document.registerElement('nav-bar', {
                 prototype: NavBarPrototype
             });
+
+      section
+        h2.full-slide Let's put it together
+
+      section
+        h2 Actually using this?
+        | <div id="tableWrapper">
+        |   <table>
+        |     <thead>
+        |       <tr>
+        |         <th rowspan="2"></th>
+        |         <th rowspan="2">Specced</th>
+        |         <th colspan="5">Implementation</th>
+        |       </tr>
+        |       <tr>
+        |         <th>Polyfill</th>
+        |         <th>Chrome / Opera</th>
+        |         <th>Firefox</th>
+        |         <th>Safari</th>
+        |         <th>IE</th>
+        |       </tr>
+        |     </thead>
+        |     <tbody>
+        |       <tr>
+        |         <th>Templates</th>
+        |         <td class="yes"><a href="https://html.spec.whatwg.org/multipage/scripting.html#the-template-element"></a></td>
+        |         <td class="yes"><a href="#polyfills"></a></td>
+        |         <td class="yes"><a href="http://www.chromestatus.com/features/5207287069147136">Stable</a></td>
+        |         <td class="yes"><a href="http://caniuse.com/#feat=template">Stable</a></td>
+        |         <td class="yes"><a href="http://caniuse.com/#feat=template">8</a></td>
+        |         <td class="no"></td>
+        |       </tr>
+        |       <tr>
+        |         <th>HTML Imports</th>
+        |         <td class="yes"><a href="http://w3c.github.io/webcomponents/spec/imports/"></a></td>
+        |         <td class="yes"><a href="#polyfills"></a></td>
+        |         <td class="yes"><a href="http://www.chromestatus.com/features/5144752345317376">Stable</a></td>
+        |         <td class="kinda"><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=877072">Behind flag</a></td>
+        |         <td class="no"></td>
+        |         <td class="no"></td>
+        |       </tr>
+        |       <tr>
+        |         <th>Custom Elements</th>
+        |         <td class="yes"><a href="http://w3c.github.io/webcomponents/spec/custom/"></a></td>
+        |         <td class="yes"><a href="#polyfills"></a></td>
+        |         <td class="yes"><a href="http://www.chromestatus.com/features/4642138092470272">Stable</a></td>
+        |         <td class="yes"><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=889230">Behind flag</a></td>
+        |         <td class="no"></td>
+        |         <td class="no"></td>
+        |       </tr>
+        |       <tr>
+        |         <th>Shadow DOM</th>
+        |         <td class="yes"><a href="http://w3c.github.io/webcomponents/spec/shadow/"></a></td>
+        |         <td class="yes"><a href="#polyfills"></a></td>
+        |         <td class="yes"><a href="http://www.chromestatus.com/features/4507242028072960">Stable</a></td>
+        |         <td class="yes"><a href="https://bugzilla.mozilla.org/show_bug.cgi?id=806506">Behind flag</a></td>
+        |         <td class="no"></td>
+        |         <td class="no"></td>
+        |       </tr>
+        |     </tbody>
+        |   </table>
+        | </div>
+        p (From <a href="http://jonrimmer.github.io/are-we-componentized-yet/">Are We Componentized Yet?</a>)
+
+      section
+        h2 Polyfills
+        ul
+          li Polymer
+          li X-Tag
+          li Bosonic
+
+      section
+        h2 Frameworks
+        ul
+          li Knockout
+          li Ember
+          li Angular (in 2.0)
 
     script(src='build/build.js')
