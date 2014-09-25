@@ -12,7 +12,6 @@
             width: 100%;
 
             background-color: #fff;
-            color: #3B79B2;
 
             font-family: 'Lobster', sans;
             font-size: 30pt;
@@ -25,13 +24,15 @@
         nav .title {
             display: inline-block;
             padding: 10px 20px 10px;
+            color: #3B79B2;
+            text-decoration: none;
         }
     </style>
 
     <nav>
-        <div class="title">
-            Comparably
-        </div>
+        <a href="/" class="title">
+            <content></content>
+        </a>
     </nav>
 </template>
 
@@ -46,7 +47,7 @@
             this.createShadowRoot().appendChild(template.content);
         };
 
-        document.registerElement('comparably-header', {
+        document.registerElement('fixed-header', {
             prototype: element
         });
     }());
