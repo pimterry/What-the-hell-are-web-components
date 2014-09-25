@@ -44,12 +44,27 @@ html
             &lt;/script&gt;
 
       section
-        h2 Templates
+        h2 &lt;Template&gt;
         pre
           code.language-markup.
             &lt;template id="img-with-caption"&gt;
               &lt;img src="/default-image.png" /&gt;
               &lt;h3 class="title"&gt;Super cool image&lt;/h3&gt;
             &lt;/template&gt;
+
+      section
+        h2 &lt;Template&gt;
+        pre
+          code.language-markup.
+            &lt;template id="img-with-caption"&gt;
+              &lt;img src="/default-image.png" /&gt;
+              &lt;h3 class="title"&gt;Super cool image&lt;/h3&gt;
+            &lt;/template&gt;
+
+            &lt;script type="text/javascript"&gt;
+                var template = document.querySelector("#img-with-caption");
+                var content = document.importNode(template.content);
+                document.body.appendNode(content);
+            &lt;/script&gt;
 
     script(src='build/build.js')
