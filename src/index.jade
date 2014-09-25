@@ -21,8 +21,8 @@ html
         h2
           ul
             li &lt;Template&gt;
-            li Shadow DOM
             li HTML Imports
+            li Shadow DOM
             li Custom Elements
 
       section
@@ -66,6 +66,41 @@ html
                 var content = document.importNode(template.content);
                 document.body.appendNode(content);
             &lt;/script&gt;
+
+      section
+        h2 HTML Imports
+        pre
+          code.language-markup.
+            &lt;head&gt;
+              &lt;link rel="import" href="otherFile.html" /&gt;
+            &lt;/head&gt;
+
+      section
+        h2 HTML Imports
+        div.sideBySide
+          div
+            h3 index.html
+            pre
+              code.language-markup.
+                &lt;head&gt;
+                  &lt;link rel="import"
+                        href="import.html" /&gt;
+                &lt;/head&gt;
+          div
+            h3 import.html
+            pre
+              code.language-markup.
+                Some HTML!
+
+                &lt;style&gt;
+                  h1 { font-size: 500%; }
+                &lt;/style&gt;
+
+                &lt;script&gt;
+                window.aThing = function () {
+                  ...
+                }
+                &lt;/script&gt;
 
       section
         h2 Shadow DOM
