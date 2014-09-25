@@ -63,7 +63,7 @@ html
 
             &lt;script type="text/javascript"&gt;
                 var template = document.querySelector("#img-with-caption");
-                var content = document.importNode(template.content);
+                var content = document.importNode(template.content, true);
                 document.body.appendNode(content);
             &lt;/script&gt;
 
