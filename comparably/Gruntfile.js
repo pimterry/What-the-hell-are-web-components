@@ -5,7 +5,8 @@ module.exports = function(grunt) {
             demo: {
                 options: {
                     open: true,
-                    keepalive: true
+                    keepalive: true,
+                    hostname: "localhost"
                 }
             }
         },
