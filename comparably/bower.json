@@ -15,6 +15,7 @@
   ],
   "dependencies": {
     "knockout": "~3.2.0",
-    "knockout-mapping": "~2.4.1"
+    "knockout-mapping": "~2.4.1",
+    "normalize-css": "~3.0.1"
   }
 }
