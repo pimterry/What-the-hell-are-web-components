@@ -11,17 +11,102 @@
   <body>
     <article>
       <section>
-        <h1>What the hell are Web Components?</h1><img src="images/web-components.svg">
+        <h1>What the hell are Web Components?</h1><img src="images/web-components.svg" style="margin-top: 0px">
+        <address class="vcard">
+          <div class="author fn">Tim Perry</div>
+          <div class="urls"><span><a href="http://twitter.com/pimterry" rel="me" class="nickname url">@pimterry</a></span></div>
+          <div class="note bio"><span>Tech Lead &amp; Open-Source Champion at&nbsp;</span><span class="org vcard"><a href="http://softwire.com" rel="group" class="org fn url">Softw<span class="i">i</span>re</a></span></div>
+        </address>
       </section>
       <section>
-        <h2>
-          <ul>
+        <h2>Web Components</h2><template id="navbar">
+         <style>@import 'http://getbootstrap.com/dist/css/bootstrap.min.css';</style>
+         <div class="bs-example bs-navbar-top-example">
+           <nav class="navbar navbar-default navbar-inverse" role="navigation">
+             <div class="container-fluid">
+               <div class="navbar-header">
+                 <button type="button" class="navbar-toggle collapsed"
+                         data-toggle="collapse"
+                         data-target="#bs-example-navbar-collapse-6">
+                   <span class="sr-only">Toggle navigation</span>
+                   <span class="icon-bar"></span>
+                   <span class="icon-bar"></span>
+                   <span class="icon-bar"></span>
+                 </button>
+               </div>
+               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+                 <ul class="nav navbar-nav">
+                   <li class="active"><a href="#">Home</a></li>
+                   <li><a href="#">Link</a></li>
+                   <li><a href="#">Link</a></li>
+                 </ul>
+               </div>
+             </div>
+           </nav>
+         </div>
+        </template>
+        <div class="navbar-target" style="width: 100%"></div>
+        <script defer async>
+         window.setTimeout(function () {
+          var template = document.querySelector("template#navbar");
+          var target = document.querySelectorAll(".navbar-target");
+          [].forEach.call(target, function(t) {
+            var shadow = t.createShadowRoot();
+            shadow.appendChild(document.importNode(template.content, true));
+          });
+         }, 0);
+        </script>
+      </section>
+      <section>
+        <h2>Web Components</h2><div class="navbar-target" style="width: 100%"></div>
+        <pre style="height: 70%; overflow-x: hidden"><code class="language-markup">&lt;div class="bs-example bs-navbar-top-example"&gt;
+  &lt;nav class="navbar navbar-default navbar-inverse" role="navigation"&gt;
+    &lt;div class="container-fluid"&gt;
+      &lt;div class="navbar-header"&gt;
+        &lt;button type="button" class="navbar-toggle collapsed"
+                data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-6"&gt;
+        &lt;span class="sr-only"&gt;Toggle navigation&lt;/span&gt;
+          &lt;span class="icon-bar"&gt;&lt;/span&gt;
+          &lt;span class="icon-bar"&gt;&lt;/span&gt;
+          &lt;span class="icon-bar"&gt;&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/div&gt;
+      
+      &lt;div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6"&gt;
+        &lt;ul class="nav navbar-nav"&gt;
+          &lt;li class="active"&gt;&lt;a href="/1"&gt;Home&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="/2"&gt;Link&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="/3"&gt;Link&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/nav&gt;
+&lt;/div&gt;
+</code></pre>
+      </section>
+      <section>
+        <h2>Web Components</h2><div class="navbar-target" style="width: 60%"></div>
+        <pre style="min-width:0"><code class="language-markup">&lt;nav-bar&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="/1"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/2"&gt;Link&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/3"&gt;Link&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav-bar&gt;        
+</code></pre>
+      </section>
+      <section>     <img src="/images/softwireLogo.png" alt="Softwire" class="logo-big"></section>
+      <section>
+        <h2>Web Components</h2>
+        <h3>
+          <ul class="bullet">
             <li>&lt;Template&gt;</li>
             <li>HTML Imports</li>
             <li>Shadow DOM</li>
             <li>Custom Elements</li>
           </ul>
-        </h2>
+        </h3>
       </section>
       <section>
         <h2>Current Templates</h2>
@@ -55,9 +140,9 @@
 &lt;/template&gt;
 
 &lt;script type="text/javascript"&gt;
-    var template = document.querySelector("#img-with-caption");
-    var content = document.importNode(template.content, true);
-    document.body.appendNode(content);
+  var template = document.querySelector("#img-with-caption");
+  var content = document.importNode(template.content, true);
+  document.body.appendNode(content);
 &lt;/script&gt;
 </code></pre>
       </section>
@@ -100,14 +185,6 @@ window.aThing = function () {
       </section>
       <section>
         <h2>Shadow DOM</h2>
-        <pre><code class="language-javascript">var div = document.querySelector("#myDiv")
-var shadow = div.createShadowRoot();
-
-shadow.innerHTML = '&lt;h3&gt;Dom-invisible headline!&lt;/h3&gt;';
-</code></pre>
-      </section>
-      <section>
-        <h2>Shadow DOM</h2>
         <div id="myDiv">Some boring content</div>
         <script type="text/javascript">
            var div = document.querySelector("#myDiv")
@@ -125,7 +202,14 @@ shadow.innerHTML = '&lt;h3&gt;Dom-invisible headline!&lt;/h3&gt;';
 </code></pre>
       </section>
       <section>
-        <h2>Shadow DOM</h2>
+        <h2>Shadow DOM</h2><div id="myDiv2">
+           Real content
+        </div>
+        <script>
+        var div = document.querySelector("#myDiv2");
+        var shadow = div.createShadowRoot();
+        shadow.innerHTML = "<h3>Originally: <content></content></h3>";
+        </script>
         <pre><code class="language-markup">&lt;div id="myDiv2"&gt;
   Real content
 &lt;/div&gt;
@@ -135,118 +219,16 @@ shadow.innerHTML = '&lt;h3&gt;Dom-invisible headline!&lt;/h3&gt;';
   var shadow = div.createShadowRoot();
   shadow.innerHTML =
   "&lt;h3&gt;" +
-    "Originally: &lt;i&gt;&lt;content&gt;&lt;/content&gt;&lt;/i&gt;" +
+    "Originally: &lt;content&gt;&lt;/content&gt;" +
   "&lt;/h3&gt;";
-&lt;/script&gt;</code></pre><div id="myDiv2">
-           Real content
-        </div>
-        <script>
-        var div = document.querySelector("#myDiv2");
-        var shadow = div.createShadowRoot();
-        shadow.innerHTML = "<h3>Originally: <i><content></content></i></h3>";
-        </script>
-      </section>
-      <section>
-        <h2>Custom Elements</h2><template id="navbar">
-         <style>@import 'http://getbootstrap.com/dist/css/bootstrap.min.css';</style>
-         <div class="bs-example bs-navbar-top-example">
-           <nav class="navbar navbar-default navbar-inverse" role="navigation">
-             <div class="container-fluid">
-               <div class="navbar-header">
-                 <button type="button" class="navbar-toggle collapsed"
-                         data-toggle="collapse"
-                         data-target="#bs-example-navbar-collapse-6">
-                   <span class="sr-only">Toggle navigation</span>
-                   <span class="icon-bar"></span>
-                   <span class="icon-bar"></span>
-                   <span class="icon-bar"></span>
-                 </button>
-                 <a class="navbar-brand" href="#">Brand</a>
-               </div>
-               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
-                 <ul class="nav navbar-nav">
-                   <li class="active"><a href="#">Home</a></li>
-                   <li><a href="#">Link</a></li>
-                   <li><a href="#">Link</a></li>
-                 </ul>
-               </div>
-             </div>
-           </nav>
-         </div>
-        </template>
-        <div class="navbar-target" style="width: 100%"></div>
-        <script defer async>
-         window.setTimeout(function () {
-          var template = document.querySelector("template#navbar");
-          var target = document.querySelectorAll(".navbar-target");
-          [].forEach.call(target, function(t) {
-            var shadow = t.createShadowRoot();
-            shadow.appendChild(document.importNode(template.content, true));
-          });
-         }, 0);
-        </script>
-      </section>
-      <section>
-        <h2>Custom Elements</h2><div class="navbar-target" style="width: 100%"></div>
-        <pre style="height: 70%; overflow-x: hidden"><code class="language-markup">&lt;div class="bs-example bs-navbar-top-example"&gt;
-  &lt;nav class="navbar navbar-default navbar-inverse" role="navigation"&gt;
-    &lt;div class="container-fluid"&gt;
-      &lt;div class="navbar-header"&gt;
-        &lt;button type="button" class="navbar-toggle collapsed"
-                data-toggle="collapse"
-                data-target="#bs-example-navbar-collapse-6"&gt;
-        &lt;span class="sr-only"&gt;Toggle navigation&lt;/span&gt;
-          &lt;span class="icon-bar"&gt;&lt;/span&gt;
-          &lt;span class="icon-bar"&gt;&lt;/span&gt;
-          &lt;span class="icon-bar"&gt;&lt;/span&gt;
-        &lt;/button&gt;
-        &lt;a class="navbar-brand" href="#"&gt;Brand&lt;/a&gt;
-      &lt;/div&gt;
-      
-      &lt;div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6"&gt;
-        &lt;ul class="nav navbar-nav"&gt;
-          &lt;li class="active"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
-          &lt;li&gt;&lt;a href="#"&gt;Link&lt;/a&gt;&lt;/li&gt;
-          &lt;li&gt;&lt;a href="#"&gt;Link&lt;/a&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/nav&gt;
-&lt;/div&gt;
-</code></pre>
-      </section>
-      <section>
-        <h2>Custom Elements</h2><div class="navbar-target" style="width: 60%"></div>
-        <pre><code class="language-markup">&lt;nav-bar inverted&gt;
-  &lt;ul&gt;
-    &lt;li&gt;Home&lt;/li&gt;
-    &lt;li&gt;Link&lt;/li&gt;
-    &lt;li&gt;Link&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/nav-bar&gt;
-</code></pre>
-      </section>
-      <section>
-        <h2>Custom Elements</h2>
-        <pre><code class="language-javascript">var NavBar = document.registerElement('nav-bar');
-
-var element = new NavBar();
-document.body.appendChild(element);
+&lt;/script&gt;
 </code></pre>
       </section>
       <section>
         <h2>Custom Elements</h2>
         <pre><code class="language-javascript">document.registerElement('nav-bar');
-
-var element = document.createElement("nav-bar")
-document.body.appendChild(element);
 </code></pre>
-      </section>
-      <section>
-        <h2>Custom Elements</h2>
-        <pre><code class="language-javascript">var NavBar = document.registerElement('nav-bar');
-</code></pre>
-        <pre><code class="language-markup">&lt;nav-bar inverted&gt;
+        <pre><code class="language-markup">&lt;nav-bar&gt;
   &lt;ul&gt;
     &lt;li&gt;Home&lt;/li&gt;
     &lt;li&gt;Link&lt;/li&gt;
@@ -298,8 +280,34 @@ NavBarPrototype.createdCallback = function () {
 };
 
 document.registerElement('nav-bar', {
-    prototype: NavBarPrototype
+  prototype: NavBarPrototype
 });
+</code></pre>
+      </section>
+      <section style="padding: 0">
+        <pre style="font-size:70%; padding: 15px 16px !important"><code class="language-javascript">&lt;template id="navBarTemplate"&gt;
+  &lt;div class="bs-example bs-navbar-top-example"&gt;
+    &lt;nav class="navbar navbar-default navbar inverse"&gt;
+      ...
+      &lt;content&gt;&lt;/content&gt;
+      ...
+    &lt/nav&gt;
+  &lt/div&gt;
+&lt;/template&gt;
+
+&lt;script&gt;
+  var NavBarPrototype = Object.create(HTMLElement.prototype);
+  
+  NavBarPrototype.createdCallback = function () {
+    var template = document.querySelector("#navBarTemplate");
+    var content = document.importNode(template.content, true);
+    this.createShadowRoot().appendNode(content);
+  };
+  
+  document.registerElement('nav-bar', {
+    prototype: NavBarPrototype
+  });           
+&lt;/script&gt;             
 </code></pre>
       </section>
       <section>
@@ -365,24 +373,22 @@ document.registerElement('nav-bar', {
         <p>(From <a href="http://jonrimmer.github.io/are-we-componentized-yet/">Are We Componentized Yet?</a>)</p>
       </section>
       <section>
-        <h2>Polyfills</h2>
-        <ul>
-          <li>Polymer</li>
-          <li>X-Tag</li>
-          <li>Bosonic</li>
-        </ul>
-      </section>
-      <section>
         <h2>Frameworks</h2>
-        <ul>
-          <li>Knockout</li>
-          <li>Ember</li>
-          <li>Angular (in 2.0)</li>
-        </ul>
+        <h3>
+          <ul class="bullet">
+            <li>Knockout</li>
+            <li>Ember</li>
+            <li>Angular (in 2.0)</li>
+          </ul>
+        </h3>
       </section>
       <section>
-        <h2>Web components!</h2>
-        <h3>Any questions?</h3>
+        <h1>Web components!</h1><br><img src="images/web-components.svg" style="margin-top: 0px">
+        <address class="vcard">
+          <div class="author fn">Tim Perry</div>
+          <div class="urls"><span><a href="http://twitter.com/pimterry" rel="me" class="nickname url">@pimterry</a></span></div>
+          <div class="note bio"><span>Tech Lead &amp; Open-Source Champion at&nbsp;</span><span class="org vcard"><a href="http://softwire.com" rel="group" class="org fn url">Softw<span class="i">i</span>re</a></span></div>
+        </address>
       </section>
     </article>
     <script src="build/build.js"></script>
