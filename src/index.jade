@@ -15,11 +15,111 @@ html
 
       section
         h1 What the hell are Web Components?
-        img(src='images/web-components.svg')
+        img(src='images/web-components.svg',style='margin-top: 0px')
+        address.vcard
+          div.author.fn Tim Perry
+          div.urls
+            span 
+              a.nickname.url(href='http://twitter.com/pimterry',rel="me") @pimterry
+          div.note.bio
+            span Tech Lead &amp; Open-Source Champion at&nbsp;
+            span.org.vcard
+              a.org.fn.url(href='http://softwire.com',rel="group") Softw<span class="i">i</span>re
+
 
       section
-        h2
-          ul
+        h2 Web Components
+
+        | <template id="navbar">
+        |  <style>@import 'http://getbootstrap.com/dist/css/bootstrap.min.css';</style>
+        |  <div class="bs-example bs-navbar-top-example">
+        |    <nav class="navbar navbar-default navbar-inverse" role="navigation">
+        |      <div class="container-fluid">
+        |        <div class="navbar-header">
+        |          <button type="button" class="navbar-toggle collapsed"
+        |                  data-toggle="collapse"
+        |                  data-target="#bs-example-navbar-collapse-6">
+        |            <span class="sr-only">Toggle navigation</span>
+        |            <span class="icon-bar"></span>
+        |            <span class="icon-bar"></span>
+        |            <span class="icon-bar"></span>
+        |          </button>
+        |        </div>
+        |        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+        |          <ul class="nav navbar-nav">
+        |            <li class="active"><a href="#">Home</a></li>
+        |            <li><a href="#">Link</a></li>
+        |            <li><a href="#">Link</a></li>
+        |          </ul>
+        |        </div>
+        |      </div>
+        |    </nav>
+        |  </div>
+        | </template>
+        | <div class="navbar-target" style="width: 100%"></div>
+        | <script defer async>
+        |  window.setTimeout(function () {
+        |   var template = document.querySelector("template#navbar");
+        |   var target = document.querySelectorAll(".navbar-target");
+        |   [].forEach.call(target, function(t) {
+        |     var shadow = t.createShadowRoot();
+        |     shadow.appendChild(document.importNode(template.content, true));
+        |   });
+        |  }, 0);
+        | </script>
+
+      section
+        h2 Web Components
+
+        | <div class="navbar-target" style="width: 100%"></div>
+
+        pre(style='height: 70%; overflow-x: hidden')
+          code.language-markup.
+            &lt;div class="bs-example bs-navbar-top-example"&gt;
+              &lt;nav class="navbar navbar-default navbar-inverse" role="navigation"&gt;
+                &lt;div class="container-fluid"&gt;
+                  &lt;div class="navbar-header"&gt;
+                    &lt;button type="button" class="navbar-toggle collapsed"
+                            data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-6"&gt;
+                      &lt;span class="sr-only"&gt;Toggle navigation&lt;/span&gt;
+                      &lt;span class="icon-bar"&gt;&lt;/span&gt;
+                      &lt;span class="icon-bar"&gt;&lt;/span&gt;
+                      &lt;span class="icon-bar"&gt;&lt;/span&gt;
+                    &lt;/button&gt;
+                  &lt;/div&gt;
+
+                  &lt;div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6"&gt;
+                    &lt;ul class="nav navbar-nav"&gt;
+                      &lt;li class="active"&gt;&lt;a href="/1"&gt;Home&lt;/a&gt;&lt;/li&gt;
+                      &lt;li&gt;&lt;a href="/2"&gt;Link&lt;/a&gt;&lt;/li&gt;
+                      &lt;li&gt;&lt;a href="/3"&gt;Link&lt;/a&gt;&lt;/li&gt;
+                    &lt;/ul&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/nav&gt;
+            &lt;/div&gt;
+            
+      section
+        h2 Web Components
+        | <div class="navbar-target" style="width: 60%"></div>
+        pre(style="min-width:0")
+          code.language-markup.
+            &lt;nav-bar&gt;
+              &lt;ul&gt;
+                &lt;li&gt;&lt;a href="/1"&gt;Home&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="/2"&gt;Link&lt;/a&gt;&lt;/li&gt;
+                &lt;li&gt;&lt;a href="/3"&gt;Link&lt;/a&gt;&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/nav-bar&gt;        
+
+      section      
+        img(src='/images/softwireLogo.png',class='logo-big',alt='Softwire')
+
+      section
+        h2 Web Components
+        h3
+          ul.bullet
             li &lt;Template&gt;
             li HTML Imports
             li Shadow DOM
@@ -62,9 +162,9 @@ html
             &lt;/template&gt;
 
             &lt;script type="text/javascript"&gt;
-                var template = document.querySelector("#img-with-caption");
-                var content = document.importNode(template.content, true);
-                document.body.appendNode(content);
+              var template = document.querySelector("#img-with-caption");
+              var content = document.importNode(template.content, true);
+              document.body.appendNode(content);
             &lt;/script&gt;
 
       section
@@ -109,16 +209,6 @@ html
       section
         h2 Shadow DOM
 
-        pre
-          code.language-javascript.
-            var div = document.querySelector("#myDiv")
-            var shadow = div.createShadowRoot();
-
-            shadow.innerHTML = '&lt;h3&gt;Dom-invisible headline!&lt;/h3&gt;';
-
-      section
-        h2 Shadow DOM
-
         div(id="myDiv") Some boring content
 
         script(type="text/javascript")
@@ -139,6 +229,14 @@ html
 
       section
         h2 Shadow DOM
+        | <div id="myDiv2">
+        |    Real content
+        | </div>
+        | <script>
+        | var div = document.querySelector("#myDiv2");
+        | var shadow = div.createShadowRoot();
+        | shadow.innerHTML = "<h3>Originally: <content></content></h3>";
+        | </script>
         pre
           code.language-markup.
             &lt;div id="myDiv2"&gt;
@@ -150,114 +248,9 @@ html
               var shadow = div.createShadowRoot();
               shadow.innerHTML =
               "&lt;h3&gt;" +
-                "Originally: &lt;i&gt;&lt;content&gt;&lt;/content&gt;&lt;/i&gt;" +
+                "Originally: &lt;content&gt;&lt;/content&gt;" +
               "&lt;/h3&gt;";
             &lt;/script&gt;
-        | <div id="myDiv2">
-        |    Real content
-        | </div>
-        | <script>
-        | var div = document.querySelector("#myDiv2");
-        | var shadow = div.createShadowRoot();
-        | shadow.innerHTML = "<h3>Originally: <i><content></content></i></h3>";
-        | </script>
-
-      section
-        h2 Custom Elements
-
-        | <template id="navbar">
-        |  <style>@import 'http://getbootstrap.com/dist/css/bootstrap.min.css';</style>
-        |  <div class="bs-example bs-navbar-top-example">
-        |    <nav class="navbar navbar-default navbar-inverse" role="navigation">
-        |      <div class="container-fluid">
-        |        <div class="navbar-header">
-        |          <button type="button" class="navbar-toggle collapsed"
-        |                  data-toggle="collapse"
-        |                  data-target="#bs-example-navbar-collapse-6">
-        |            <span class="sr-only">Toggle navigation</span>
-        |            <span class="icon-bar"></span>
-        |            <span class="icon-bar"></span>
-        |            <span class="icon-bar"></span>
-        |          </button>
-        |          <a class="navbar-brand" href="#">Brand</a>
-        |        </div>
-        |        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
-        |          <ul class="nav navbar-nav">
-        |            <li class="active"><a href="#">Home</a></li>
-        |            <li><a href="#">Link</a></li>
-        |            <li><a href="#">Link</a></li>
-        |          </ul>
-        |        </div>
-        |      </div>
-        |    </nav>
-        |  </div>
-        | </template>
-        | <div class="navbar-target" style="width: 100%"></div>
-        | <script defer async>
-        |  window.setTimeout(function () {
-        |   var template = document.querySelector("template#navbar");
-        |   var target = document.querySelectorAll(".navbar-target");
-        |   [].forEach.call(target, function(t) {
-        |     var shadow = t.createShadowRoot();
-        |     shadow.appendChild(document.importNode(template.content, true));
-        |   });
-        |  }, 0);
-        | </script>
-
-      section
-        h2 Custom Elements
-
-        | <div class="navbar-target" style="width: 100%"></div>
-
-        pre(style='height: 70%; overflow-x: hidden')
-          code.language-markup.
-            &lt;div class="bs-example bs-navbar-top-example"&gt;
-              &lt;nav class="navbar navbar-default navbar-inverse" role="navigation"&gt;
-                &lt;div class="container-fluid"&gt;
-                  &lt;div class="navbar-header"&gt;
-                    &lt;button type="button" class="navbar-toggle collapsed"
-                            data-toggle="collapse"
-                            data-target="#bs-example-navbar-collapse-6"&gt;
-                      &lt;span class="sr-only"&gt;Toggle navigation&lt;/span&gt;
-                      &lt;span class="icon-bar"&gt;&lt;/span&gt;
-                      &lt;span class="icon-bar"&gt;&lt;/span&gt;
-                      &lt;span class="icon-bar"&gt;&lt;/span&gt;
-                    &lt;/button&gt;
-                    &lt;a class="navbar-brand" href="#"&gt;Brand&lt;/a&gt;
-                  &lt;/div&gt;
-
-                  &lt;div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6"&gt;
-                    &lt;ul class="nav navbar-nav"&gt;
-                      &lt;li class="active"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
-                      &lt;li&gt;&lt;a href="#"&gt;Link&lt;/a&gt;&lt;/li&gt;
-                      &lt;li&gt;&lt;a href="#"&gt;Link&lt;/a&gt;&lt;/li&gt;
-                    &lt;/ul&gt;
-                  &lt;/div&gt;
-                &lt;/div&gt;
-              &lt;/nav&gt;
-            &lt;/div&gt;
-            
-      section
-        h2 Custom Elements
-        | <div class="navbar-target" style="width: 60%"></div>
-        pre
-          code.language-markup.
-            &lt;nav-bar inverted&gt;
-              &lt;ul&gt;
-                &lt;li&gt;Home&lt;/li&gt;
-                &lt;li&gt;Link&lt;/li&gt;
-                &lt;li&gt;Link&lt;/li&gt;
-              &lt;/ul&gt;
-            &lt;/nav-bar&gt;
-
-      section
-        h2 Custom Elements
-        pre
-          code.language-javascript.
-            var NavBar = document.registerElement('nav-bar');
-
-            var element = new NavBar();
-            document.body.appendChild(element);
 
       section
         h2 Custom Elements
@@ -265,18 +258,9 @@ html
           code.language-javascript.
             document.registerElement('nav-bar');
 
-            var element = document.createElement("nav-bar")
-            document.body.appendChild(element);
-
-      section
-        h2 Custom Elements
-        pre
-          code.language-javascript.
-            var NavBar = document.registerElement('nav-bar');
-
         pre
           code.language-markup.
-            &lt;nav-bar inverted&gt;
+            &lt;nav-bar&gt;
               &lt;ul&gt;
                 &lt;li&gt;Home&lt;/li&gt;
                 &lt;li&gt;Link&lt;/li&gt;
@@ -331,8 +315,35 @@ html
             };
 
             document.registerElement('nav-bar', {
-                prototype: NavBarPrototype
+              prototype: NavBarPrototype
             });
+
+      section(style='padding: 0')
+        pre(style='font-size:70%; padding: 15px 16px !important')
+          code.language-javascript.
+            &lt;template id="navBarTemplate"&gt;
+              &lt;div class="bs-example bs-navbar-top-example"&gt;
+                &lt;nav class="navbar navbar-default navbar inverse"&gt;
+                  ...
+                  &lt;content&gt;&lt;/content&gt;
+                  ...
+                &lt/nav&gt;
+              &lt/div&gt;
+            &lt;/template&gt;
+
+            &lt;script&gt;
+              var NavBarPrototype = Object.create(HTMLElement.prototype);
+
+              NavBarPrototype.createdCallback = function () {
+                var template = document.querySelector("#navBarTemplate");
+                var content = document.importNode(template.content, true);
+                this.createShadowRoot().appendNode(content);
+              };
+
+              document.registerElement('nav-bar', {
+                prototype: NavBarPrototype
+              });           
+            &lt;/script&gt;             
 
       section
         h2.full-slide Let's put it together
@@ -398,21 +409,25 @@ html
         p (From <a href="http://jonrimmer.github.io/are-we-componentized-yet/">Are We Componentized Yet?</a>)
 
       section
-        h2 Polyfills
-        ul
-          li Polymer
-          li X-Tag
-          li Bosonic
-
-      section
         h2 Frameworks
-        ul
-          li Knockout
-          li Ember
-          li Angular (in 2.0)
+        h3
+          ul.bullet
+            li Knockout
+            li Ember
+            li Angular (in 2.0)
 
       section
-        h2 Web components!
-        h3 Any questions?
+        h1 Web components!
+        br
+        img(src='images/web-components.svg',style='margin-top: 0px')
+        address.vcard
+          div.author.fn Tim Perry
+          div.urls
+            span 
+              a.nickname.url(href='http://twitter.com/pimterry',rel="me") @pimterry
+          div.note.bio
+            span Tech Lead &amp; Open-Source Champion at&nbsp;
+            span.org.vcard
+              a.org.fn.url(href='http://softwire.com',rel="group") Softw<span class="i">i</span>re
 
     script(src='build/build.js')
